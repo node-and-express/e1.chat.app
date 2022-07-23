@@ -7,12 +7,39 @@ const port=3000;
 const server=http.createServer(app);
 const server_msg=()=>{console.log('Server running on *:3000')};
 
+//configure mail sending
+const nodemailer=require('nodemailer');
+var transporter = nodemailer.createTransport({
+    host: 'smtp.ethereal.email',
+    port: 587,
+    auth: {
+        user: 'martin.vandervort50@ethereal.email',
+        pass: 'AyUCdNj7RgfGrp7DD9'
+    }
+});
+
+var mailOptions={
+    from:'martin.vandervort50@ethereal.email',
+    to:'chabid492@gmail.com',
+    subject:'Welcome',
+    text:'It is testing mail of node js project',
+};
+
+transporter.sendMail(mailOptions,(error,info)=>{
+    if(error){
+        console.log(error);
+    }else{
+        console.log(info.response);
+    }
+});
+
 //socket server
 const { Server }=require('socket.io');
 const io=new Server(server);  //passing app server to Socket Server constructor for communication
 
 app.use(express.static("./")); 
 
+//all about real time chat
 io.on('connection',(socket)=>{
     
     //broadcast message on any user connected
@@ -33,6 +60,7 @@ io.on('connection',(socket)=>{
     });
 });
 
+//app routes
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/views/index.html');
 });
