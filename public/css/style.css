@@ -193,4 +193,8 @@
   .message_template {
     display: none;
   }
+
+  .text{
+    word-break: break-all;
+  }
   

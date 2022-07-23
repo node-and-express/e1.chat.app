@@ -16,7 +16,7 @@ app.use(express.static("./"));
 io.on('connection',(socket)=>{
     console.log('A user connected');
     socket.on('chat',(msg)=>{
-        console.log(msg);
+        //console.log(msg);
         //socket.broadcast.emit(msg);  //broadcst to other user
         io.emit('chat',msg);      //broadcast to everyone
     });

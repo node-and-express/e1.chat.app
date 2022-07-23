@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!------ Include the above in your HEAD tag ---------->
+    <link rel="icon"  href="../public/img/chat.png">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -86,12 +87,18 @@
 
         //receiving msg
         socket.on('chat',(msg)=>{
-            var html='';
+            var html='<li class="message left appeared">'+
+                        '<div class="avatar"></div>'+
+                        '<div class="text_wrapper">'+
+                            '<div class="text">'+msg+'</div>'+
+                        '</div>'+
+                    '</li>';
             //console.log(msg);
             var message=document.getElementById('message');
-            var item = document.createElement('li');
-            item.textContent = msg;
-            message.appendChild(item);
+            //var item = document.createElement('li');
+            //item.textContent = msg;
+           // message.appendChild(item);
+           message.innerHTML +=html;
         });
     </script>
 </body>
