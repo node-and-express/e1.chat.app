@@ -14,15 +14,22 @@ const io=new Server(server);  //passing app server to Socket Server constructor 
 app.use(express.static("./")); 
 
 io.on('connection',(socket)=>{
-    console.log('A user connected');
+    
+    //broadcast message on any user connected
+    console.log('A user connected to chat');
+    io.emit('chat','An user has joind chat');
+
+    //broadcast message
     socket.on('chat',(msg)=>{
         //console.log(msg);
         //socket.broadcast.emit(msg);  //broadcst to other user
         io.emit('chat',msg);      //broadcast to everyone
     });
 
+    //broadcast messsage on any user disconnect
     socket.on('disconnect',()=>{
         console.log("User disconnected");
+        io.emit('chat','An user has leaved chat');
     });
 });
 
